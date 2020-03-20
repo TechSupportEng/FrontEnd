@@ -14,7 +14,9 @@ const Registration = props => {
     axios
       .post("http://localhost:3000/api/users/register", register)
       .then(response => {
+        // console.log("response from post for register component", response)
         localStorage.setItem("key", response.data.key)
+        setRegister(response.data)
         props.history.push("/login")
       })
       .catch(error => {
