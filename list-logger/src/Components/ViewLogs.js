@@ -13,7 +13,7 @@ export const ViewLogs = () => {
     //     console.log(response.data)
     //   })
     //   .catch(error => {
-    //     console.log("This is an error from the ViewLogs", error)
+    //     console.log("This is an error from the ViewLsogs", error)
     //   })
   }
 
@@ -66,7 +66,7 @@ export const ViewLogs = () => {
           />
         </div>
         <div className="parents">
-          <label>Dicoveries</label>
+          <label>DISCOVERIES</label>
           <input
             className="inputs"
             type="text"
@@ -77,7 +77,7 @@ export const ViewLogs = () => {
           />
         </div>
         <div className="parents">
-          <label>Additional Comments</label>
+          <label>ADDITIONAL COMMENTS</label>
           <input
             className="inputs"
             type="text"

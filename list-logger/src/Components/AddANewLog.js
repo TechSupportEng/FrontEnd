@@ -66,7 +66,7 @@ export const AddANewLog = () => {
           />
         </div>
         <div className="parents">
-          <label>Dicoveries</label>
+          <label>DISCOVERIES</label>
           <input
             className="inputs"
             type="text"
@@ -77,12 +77,12 @@ export const AddANewLog = () => {
           />
         </div>
         <div className="parents">
-          <label>Additional Comments</label>
+          <label>ADDITIONAL COMMENTS</label>
           <input
             className="inputs"
             type="text"
             name="discoveries"
-            placeholder="Is this automate-able?"
+            placeholder="Is there a pattern? Anything extra we might need to know in the future looking back?"
             //onChange={changeHandler}
             //value={incidentNumber}
           />
