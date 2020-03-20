@@ -1,0 +1,8 @@
+.button1 {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(70deg, #fc5813, #fc8d01);
+  color: white;
+  font-size: 1rem;
+  padding: 25px 45px;
+}

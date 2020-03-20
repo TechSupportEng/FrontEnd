@@ -5,28 +5,28 @@ import "../Styles/forms.css"
 
 const Registration = props => {
   const [register, setRegister] = useState({
-    name: "",
+    username: "",
     password: ""
   })
 
   const submitHandler = event => {
     event.preventDefault()
     axios
-      .post("", register)
+      .post("http://localhost:3000/api/users/register", register)
       .then(response => {
         localStorage.setItem("key", response.data.key)
-        props.history.push("/view")
+        props.history.push("/login")
       })
       .catch(error => {
         console.log("error from register component", error)
       }, [])
   }
 
-  const handleChange = user => event => {
+  const handleChange = event => {
     console.log(event)
     setRegister({
       ...register,
-      [user]: event.target.value
+      [event.target.name]: event.target.value
     })
   }
   console.log(register)
@@ -40,10 +40,10 @@ const Registration = props => {
         <div className="parent">
           <input
             type="text"
-            name="name"
+            name="username"
             placeholder="Enter your First name"
-            value={props.name}
-            onChange={handleChange("name")}
+            value={props.username}
+            onChange={handleChange}
             required
           />
         </div>
@@ -56,7 +56,7 @@ const Registration = props => {
             name="password"
             placeholder="*********"
             value={props.password}
-            onChange={handleChange("password")}
+            onChange={handleChange}
             required
           />
         </div>
