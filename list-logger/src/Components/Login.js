@@ -3,34 +3,36 @@ import axios from "axios"
 import "../Styles/forms.css"
 import { Link } from "react-router-dom"
 
-export const Login = () => {
+export const Login = props => {
   const [credentials, setCredentials] = useState({
-    name: "",
+    username: "",
     password: ""
   })
 
-  const changeHandler = event => {
+  const handleSubmit = event => {
+    event.preventDefault()
+    axios
+      .post("http://localhost:3000/api/users/login", credentials)
+      .then(response => {
+        localStorage.setItem("token", response.data.key) // pass down the token
+        props.history.push("/view") // pushed to view component
+      })
+      .catch(error => {
+        console.log("This is an error from the Login submitHandler", error)
+      }, [])
+  }
+
+  const handleChange = event => {
+    console.log("from handle change", event)
     setCredentials({
       ...credentials,
-      [event.target.name]: [event.target.value]
+      [event.target.name]: event.target.value
     })
-  }
-  const submitHandler = event => {
-    event.preventDefault()
-    // axios
-    //   .post("", credentials)
-    //   .then(response => {
-    //     localStorage.setitem("token", response.data.key)
-    //     history.pushState("/view")
-    //   })
-    //   .catch(error => {
-    //     console.log("This is an error from the Login submitHandler", error)
-    //   })
   }
 
   return (
     <div className="formContainer">
-      <form onsubmit={submitHandler}>
+      <form onSubmit={handleSubmit}>
         <h2>Sign In</h2>
         <div className="parent">
           <label>Name</label>
@@ -39,10 +41,10 @@ export const Login = () => {
           <input
             className="input"
             type="text"
-            name="name"
+            name="username"
             placeholder="Wriggley"
-            onChange={changeHandler}
-            value={credentials.name}
+            onChange={handleChange}
+            value={props.username}
           />
         </div>
         <div className="parent">
@@ -54,12 +56,12 @@ export const Login = () => {
             type="password"
             name="password"
             placeholder="********"
-            onChange={changeHandler}
-            value={credentials.password}
+            onChange={handleChange}
+            value={props.password}
           />
         </div>
         <div className="parent">
-          <button onclick={submitHandler} className="button">
+          <button type="submit" className="button">
             Submit
           </button>
         </div>

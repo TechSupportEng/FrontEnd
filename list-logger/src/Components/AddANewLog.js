@@ -1,35 +1,55 @@
-import React from "react"
+import React, { useState } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
 import "../Styles/forms.css"
 import "../Styles/logform.css"
 
-export const AddANewLog = () => {
+export const AddANewLog = props => {
+  const [addLog, setAddLog] = useState({
+    timeOfLog: "",
+    timeOfIncident: "",
+    incidentNumber: "",
+    status: "",
+    errorMessage: "",
+    nameOfLog: "",
+    discoveries: "",
+    outcome: ""
+  })
+
   const submitHandler = event => {
     event.preventDefault()
-    // axios
-    //   .get("")
-    //   .then(response => {
-    //     console.log(response.data)
-    //   })
-    //   .catch(error => {
-    //     console.log("This is an error from the ViewLogs", error)
-    //   })
+    axios
+      .post("http://localhost:3000/api/logs/logscards", addLog)
+      .then(response => {
+        console.log(response.data)
+        setAddLog(response.data)
+        props.history.push("/view")
+      })
+      .catch(error => {
+        console.log("This is an error from the ViewLogs", error)
+      }, [])
+  }
+
+  const changeHandler = event => {
+    event.preventDefault()
+    setAddLog({
+      ...addLog,
+      [event.target.name]: event.target.value
+    })
   }
 
   return (
     <div className="formContainer">
-      <form className="log-form" onsubmit={submitHandler}>
+      <form className="log-form" onSubmit={submitHandler}>
         <h2>T-SET LOG REPORT</h2>
         <div className="parents">
           <label>TIME</label>
           <input
             className="inputs"
             type="text"
-            name="name"
+            name="timeOfLog"
             placeholder="17:30"
-            //onChange={changeHandler}
-            //value={name}
+            value={props.timeOfLog}
+            onChange={changeHandler}
           />
         </div>
         <div className="parents">
@@ -39,8 +59,8 @@ export const AddANewLog = () => {
             type="text"
             name="logName"
             placeholder="Mia-Gateway Dashboard"
-            //onChange={changeHandler}
-            // value={logName}
+            value={props.logName}
+            onChange={changeHandler}
           />
         </div>
         <div className="parents">
@@ -48,10 +68,21 @@ export const AddANewLog = () => {
           <input
             className="inputs"
             type="text"
-            name="incidentId"
+            name="incidentNumber"
             placeholder="Incident Number or Time of Incident"
-            //onChange={changeHandler}
-            //value={incidentNumber}
+            value={props.incidentNumber}
+            onChange={changeHandler}
+          />
+        </div>
+        <div className="parents">
+          <label>ERROR MESSAGE</label>
+          <input
+            className="inputs"
+            type="text"
+            name="errorMessage"
+            placeholder="Error Message"
+            value={props.errorMessage}
+            onChange={changeHandler}
           />
         </div>
         <div className="parents">
@@ -61,34 +92,34 @@ export const AddANewLog = () => {
             type="text"
             name="status"
             placeholder="Needs Follow Up || LGTM"
-            //onChange={changeHandler}
-            //value={incidentNumber}
+            value={props.status}
+            onChange={changeHandler}
           />
         </div>
         <div className="parents">
-          <label>Dicoveries</label>
+          <label>DISCOVERIES</label>
           <input
             className="inputs"
             type="text"
             name="discoveries"
             placeholder="What did you research"
-            //onChange={changeHandler}
-            //value={incidentNumber}
+            value={props.discoveries}
+            onChange={changeHandler}
           />
         </div>
         <div className="parents">
-          <label>Additional Comments</label>
+          <label>ADDITIONAL COMMENTS</label>
           <input
             className="inputs"
             type="text"
-            name="discoveries"
-            placeholder="Is this automate-able?"
-            //onChange={changeHandler}
-            //value={incidentNumber}
+            name="outcome"
+            placeholder="Is there a pattern? Anything extra we might need to know in the future looking back?"
+            value={props.outcome}
+            onChange={changeHandler}
           />
         </div>
         <div className="parent">
-          <button onclick={submitHandler} className="button">
+          <button onClick={submitHandler} className="button">
             Submit
           </button>
         </div>
