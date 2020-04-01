@@ -15,7 +15,7 @@ export const Login = props => {
       .post("http://localhost:3000/api/users/login", credentials)
       .then(response => {
         localStorage.setItem("token", response.data.key) // pass down the token
-        props.history.push("/view") // pushed to view component
+        props.history.push("/newlog") // pushed to view component
       })
       .catch(error => {
         console.log("This is an error from the Login submitHandler", error)
