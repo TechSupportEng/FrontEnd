@@ -5,4 +5,13 @@
   color: white;
   font-size: 1rem;
   padding: 25px 45px;
+  margin: 15px;
+  text-decoration: none;
+}
+.parent1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
 }
