@@ -5,6 +5,7 @@ import "../Styles/logform.css"
 
 export const AddANewLog = props => {
   const [addLog, setAddLog] = useState({
+    nameOfLog: "",
     timeOfLog: "",
     timeOfIncident: "",
     incidentNumber: "",
@@ -30,7 +31,7 @@ export const AddANewLog = props => {
   }
 
   const changeHandler = event => {
-    event.preventDefault()
+    console.log("event changing", event)
     setAddLog({
       ...addLog,
       [event.target.name]: event.target.value
@@ -57,9 +58,9 @@ export const AddANewLog = props => {
           <input
             className="inputs"
             type="text"
-            name="logName"
+            name="nameOfLog"
             placeholder="Mia-Gateway Dashboard"
-            value={props.logName}
+            value={props.nameOfLog}
             onChange={changeHandler}
           />
         </div>
