@@ -21,7 +21,7 @@ export const AddANewLog = props => {
     axios
       .post("http://localhost:3000/api/logs/logscards", addLog)
       .then(response => {
-        console.log("I can see the data",response.data)
+        console.log(response.data)
         setAddLog(response.data)
         props.history.push("/view")
       })
