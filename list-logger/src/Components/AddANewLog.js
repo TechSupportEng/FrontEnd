@@ -11,7 +11,6 @@ export const AddANewLog = props => {
     incidentNumber: "",
     status: "",
     errorMessage: "",
-    nameOfLog: "",
     discoveries: "",
     outcome: ""
   })
